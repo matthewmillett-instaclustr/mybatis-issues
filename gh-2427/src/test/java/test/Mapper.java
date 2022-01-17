@@ -30,4 +30,14 @@ public interface Mapper {
   })
   User getUserByName(@Param("user") final String fullName);
 
+  @Select(
+          "SELECT id, account_name, company_name, city FROM accounts WHERE id = #{accountId}"
+  )
+  @ConstructorArgs({
+          @Arg(column = "id", javaType = String.class),
+          @Arg(column = "account_name", javaType = String.class),
+          @Arg(column = "company_name", javaType = String.class),
+          @Arg(column = "city", javaType = String.class),
+  })
+  Account getAccountById(@Param("accountId") final String accountId);
 }

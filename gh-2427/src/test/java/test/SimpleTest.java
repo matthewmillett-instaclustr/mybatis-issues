@@ -50,4 +50,16 @@ public class SimpleTest {
       assertEquals("Melbourne", secondUser.city);
     }
   }
+
+  @Test
+  public void shouldGetAnAccount() {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      Mapper mapper = sqlSession.getMapper(Mapper.class);
+      Account firstAccount = mapper.getAccountById("1");
+      assertEquals("Company A", firstAccount.companyName);
+
+      Account secondAccount = mapper.getAccountById("2");
+      assertEquals("Company B", secondAccount.companyName);
+    }
+  }
 }
