@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 public interface Mapper {
   @Select(
-          "SELECT id, full_name, phone_number, city, is_admin FROM users WHERE id = #{user.name}"
+          "SELECT id, full_name, phone_number, city, is_admin FROM users WHERE id = #{user.id}"
   )
   @ConstructorArgs({
           @Arg(column = "id", javaType = String.class),
