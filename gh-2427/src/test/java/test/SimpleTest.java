@@ -44,10 +44,10 @@ public class SimpleTest {
       assertEquals("Jane Doe", secondUser.fullName);
 
       User thirdUser = mapper.getUserByName("John Smith");
-      assertEquals("Sydney", secondUser.city);
+      assertEquals("Sydney", thirdUser.city);
 
       User fourthUser = mapper.getUserByName("Jane Doe");
-      assertEquals("Melbourne", secondUser.city);
+      assertEquals("Melbourne", fourthUser.city);
     }
   }
 

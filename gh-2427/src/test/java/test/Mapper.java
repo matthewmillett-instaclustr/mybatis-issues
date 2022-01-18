@@ -1,9 +1,6 @@
 package test;
 
-import org.apache.ibatis.annotations.Arg;
-import org.apache.ibatis.annotations.ConstructorArgs;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 public interface Mapper {
   @Select(
@@ -19,7 +16,7 @@ public interface Mapper {
   User getUserById(@Param("user") final UserPrimaryKey user);
 
   @Select(
-          "SELECT id, full_name, phone_number, city, is_admin FROM users WHERE full_name = #{user.name}"
+          "SELECT id, full_name, phone_number, city, is_admin FROM users WHERE full_name = #{user}"
   )
   @ConstructorArgs({
           @Arg(column = "id", javaType = String.class),
