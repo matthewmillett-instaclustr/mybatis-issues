@@ -9,11 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// NOTE: This uses <T> instead of <T extends PrimaryKey> because it also needs to accept String and UUID for backwards
-//       compatibility so that usages like: #{temp_storage.id}::ic.temp_storage_id (explicit) will keep working in
-//       addition to the newly supported: #{temp_storage}::ic.temp_storage_id (implicit). Full functionality is
-//       currently blocked until we can upgrade MyBatis to v3.5.2 for https://github.com/mybatis/mybatis-3/pull/859.
-
 public abstract class AbstractPrimaryKeyTypeHandler<T> extends BaseTypeHandler<T> {
 
     private final Class<T> type;

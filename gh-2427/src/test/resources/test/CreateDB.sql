@@ -22,3 +22,13 @@ create table accounts (
 insert into accounts (id, account_name, company_name, city) values
 ('1', 'Account A', 'Company A', 'Canberra'),
 ('2', 'Account B', 'Company B', 'Brisbane');
+
+create table companies (
+  company_name varchar(20),
+  company_account varchar(20),
+  main_user varchar(20)
+);
+
+insert into companies (company_name, company_account, main_user) values
+('Company A', '1', '1'),
+('Company B', '2', '2');

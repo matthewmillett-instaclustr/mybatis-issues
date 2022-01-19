@@ -62,4 +62,16 @@ public class SimpleTest {
       assertEquals("Company B", secondAccount.companyName);
     }
   }
+
+  @Test
+  public void shouldGetACompany() {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      Mapper mapper = sqlSession.getMapper(Mapper.class);
+      Company firstCompany = mapper.getCompanyByName("Company A");
+      assertEquals(new UserPrimaryKey("1"), firstCompany.mainUser);
+
+      Company secondCompany = mapper.getCompanyByName("Company B");
+      assertEquals(new UserPrimaryKey("2"), secondCompany.mainUser);
+    }
+  }
 }

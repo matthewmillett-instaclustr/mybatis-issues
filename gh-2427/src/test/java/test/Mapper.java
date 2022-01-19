@@ -37,4 +37,14 @@ public interface Mapper {
           @Arg(column = "city", javaType = String.class),
   })
   Account getAccountById(@Param("accountId") final String accountId);
+
+  @Select(
+          "SELECT company_name, company_account, main_user FROM companies WHERE company_name = #{companyName}"
+  )
+  @ConstructorArgs({
+          @Arg(column = "company_name", javaType = String.class),
+          @Arg(column = "company_account", javaType = String.class),
+          @Arg(column = "main_user", javaType = UserPrimaryKey.class)
+  })
+  Company getCompanyByName(@Param("companyName") final String companyName);
 }
