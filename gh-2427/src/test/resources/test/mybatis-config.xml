@@ -7,7 +7,6 @@
 
   <typeHandlers>
     <typeHandler handler="test.UserPrimaryKeyHandler"/>
-    <typeHandler handler="test.UserTypeHandler"/>
   </typeHandlers>
 
   <environments default="development">

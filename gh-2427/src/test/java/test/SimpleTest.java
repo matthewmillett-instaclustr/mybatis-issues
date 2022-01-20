@@ -74,4 +74,13 @@ public class SimpleTest {
       assertEquals(new UserPrimaryKey("2"), secondCompany.mainUser);
     }
   }
+
+  @Test
+  public void shouldGetUserAdmin() {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      Mapper mapper = sqlSession.getMapper(Mapper.class);
+      boolean isAdmin = mapper.isUserAdmin(new UserPrimaryKey("1"));
+      assertFalse(isAdmin);
+    }
+  }
 }

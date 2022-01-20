@@ -28,6 +28,14 @@ public interface Mapper {
   User getUserByName(@Param("user") final String fullName);
 
   @Select(
+          "SELECT is_admin FROM users WHERE id = #{user.id}"
+  )
+  @ConstructorArgs({
+          @Arg(column = "is_admin", javaType = boolean.class)
+  })
+  boolean isUserAdmin(@Param("user") final UserPrimaryKey user);
+
+  @Select(
           "SELECT id, account_name, company_name, city FROM accounts WHERE id = #{accountId}"
   )
   @ConstructorArgs({
