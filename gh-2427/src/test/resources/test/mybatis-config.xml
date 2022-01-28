@@ -6,7 +6,6 @@
 <configuration>
 
   <typeHandlers>
-    <typeHandler handler="test.UserPrimaryKeyHandler"/>
   </typeHandlers>
 
   <environments default="development">

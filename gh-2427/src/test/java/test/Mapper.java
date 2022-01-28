@@ -2,6 +2,8 @@ package test;
 
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 public interface Mapper {
   @Select(
           "SELECT id, full_name, phone_number, city, is_admin FROM users WHERE id = #{user.id}"
@@ -36,6 +38,18 @@ public interface Mapper {
   boolean isUserAdmin(@Param("user") final UserPrimaryKey user);
 
   @Select(
+          "SELECT * FROM users"
+  )
+  @ConstructorArgs({
+          @Arg(column = "id", javaType = String.class),
+          @Arg(column = "full_name", javaType = String.class),
+          @Arg(column = "phone_number", javaType = String.class),
+          @Arg(column = "city", javaType = String.class),
+          @Arg(column = "is_admin", javaType = boolean.class)
+  })
+  List<User> getUsers();
+
+  @Select(
           "SELECT id, account_name, company_name, city FROM accounts WHERE id = #{accountId}"
   )
   @ConstructorArgs({
@@ -52,7 +66,32 @@ public interface Mapper {
   @ConstructorArgs({
           @Arg(column = "company_name", javaType = String.class),
           @Arg(column = "company_account", javaType = String.class),
-          @Arg(column = "main_user", javaType = UserPrimaryKey.class)
+          @Arg(column = "main_user", javaType = UserPrimaryKey.class, typeHandler = UserPrimaryKeyHandler.class)
   })
   Company getCompanyByName(@Param("companyName") final String companyName);
+
+  @Select(
+          "SELECT status FROM tasks WHERE status = #{status}"
+  )
+  @ConstructorArgs({
+          @Arg(column = "status", javaType = Status.class)
+  })
+  List<Status> getStatusFromStatus(@Param("status") final Status status);
+
+  @Select(
+          "SELECT status FROM tasks WHERE status = #{status.name}"
+  )
+  @ConstructorArgs({
+          @Arg(column = "status", javaType = Status.class)
+  })
+  List<Status> getStatusFromStatusName(@Param("status") final Status status);
+
+  @Select(
+          "SELECT status FROM tasks WHERE status = #{status}"
+  )
+  @ConstructorArgs({
+          @Arg(column = "status", javaType = Status.class)
+  })
+  List<Status> getStatusFromStatusNameString(@Param("status") final String status);
+
 }

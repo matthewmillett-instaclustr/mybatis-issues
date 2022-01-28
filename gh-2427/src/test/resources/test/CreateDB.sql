@@ -32,3 +32,13 @@ create table companies (
 insert into companies (company_name, company_account, main_user) values
 ('Company A', '1', '1'),
 ('Company B', '2', '2');
+
+create table tasks (
+    task_name varchar(20),
+    status varchar(20)
+);
+
+insert into tasks (task_name, status) values
+('Task 1', 'completed'),
+('Task 2', 'in progress'),
+('Task 3', 'queued');

@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 
 import java.io.Reader;
 import java.sql.Connection;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -81,6 +82,36 @@ public class SimpleTest {
       Mapper mapper = sqlSession.getMapper(Mapper.class);
       boolean isAdmin = mapper.isUserAdmin(new UserPrimaryKey("1"));
       assertFalse(isAdmin);
+    }
+  }
+
+  @Test
+  public void shouldGetUsers() {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      Mapper mapper = sqlSession.getMapper(Mapper.class);
+      List<User> users = mapper.getUsers();
+      assertEquals(users.size(), 2);
+    }
+  }
+
+  @Test
+  public void shouldGetTasks() {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      Mapper mapper = sqlSession.getMapper(Mapper.class);
+      List<Status> status = mapper.getStatusFromStatus(Status.QUEUED);
+      assertEquals(status.size(), 0);
+
+      status = mapper.getStatusFromStatusNameString(Status.QUEUED.name());
+      assertEquals(status.size(), 1);
+    }
+  }
+
+  @Test
+  public void shouldGetTasksFailed() throws Exception {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      Mapper mapper = sqlSession.getMapper(Mapper.class);
+      List<Status> status = mapper.getStatusFromStatusName(Status.QUEUED);
+      assertEquals(status.size(), 1);
     }
   }
 }
