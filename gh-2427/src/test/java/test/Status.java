@@ -3,7 +3,7 @@ package test;
 public enum Status {
     QUEUED("queued task", "queued"),
     IN_PROGRESS("in progress task", "in progress"),
-    COMPLETED("completed task", "deleted");
+    COMPLETED("completed task", "completed");
 
 
     public final String name;

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import java.io.Reader;
 import java.sql.Connection;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -101,17 +102,26 @@ public class SimpleTest {
       List<Status> status = mapper.getStatusFromStatus(Status.QUEUED);
       assertEquals(status.size(), 0);
 
+      status = mapper.getStatusFromStatusName(Status.QUEUED);
+      assertEquals(status.size(), 1);
+
+      status = mapper.getStatusFromDisplayName(Status.QUEUED);
+      assertEquals(status.size(), 0);
+
       status = mapper.getStatusFromStatusNameString(Status.QUEUED.name());
       assertEquals(status.size(), 1);
     }
   }
 
   @Test
-  public void shouldGetTasksFailed() throws Exception {
+  public void shouldGetAllCompanies() {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       Mapper mapper = sqlSession.getMapper(Mapper.class);
-      List<Status> status = mapper.getStatusFromStatusName(Status.QUEUED);
-      assertEquals(status.size(), 1);
+      List<Company> companies = mapper.getCompaniesByName(Set.of("Company A", "Company B"));
+      assertEquals(companies.size(), 2);
+
+      companies = mapper.getCompaniesByName(Set.of());
+      assertEquals(companies.size(), 0);
     }
   }
 }

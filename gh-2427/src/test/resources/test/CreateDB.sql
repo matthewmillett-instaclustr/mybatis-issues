@@ -41,4 +41,7 @@ create table tasks (
 insert into tasks (task_name, status) values
 ('Task 1', 'completed'),
 ('Task 2', 'in progress'),
-('Task 3', 'queued');
+('Task 3', 'queued'),
+('Task 4', 'completed task'),
+('Task 5', 'in progress task'),
+('Task 6', 'queued task');
